@@ -63,3 +63,20 @@ jobs:
           context: .
           push: true
           tags: sneh1919/amazon-compute:latest
+
+
+  deploy:
+    runs-on: self-hosted  # Executes on the EC2 instance
+    needs: build-train-test
+    steps:
+      - name: Pull Latest Docker Image
+        run: docker pull sneh1919/amazon-compute:latest
+
+      - name: Stop and Remove Old Container
+        run: |
+          docker stop bike-rental-api || true
+          docker rm bike-rental-api || true
+
+      - name: Run New API Container
+        run: |
+          docker run -d --name bike-rental-api -p 8000:8000 sneh1919/amazon-compute:latest
