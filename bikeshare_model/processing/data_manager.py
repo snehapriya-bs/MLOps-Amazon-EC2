@@ -89,13 +89,16 @@ def remove_old_pipelines(*, files_to_keep: t.List[str]) -> None:
     This ensures a one-to-one mapping between the package version and 
     the model version to be imported and used by other applications.
     """
+    # Dynamically include the latest model version
+    model_filename = f"{config.app_config_.pipeline_save_file}{_version}.pkl"
 
-     do_not_delete = files_to_keep + ["__init__.py", "bikeshare__model_output_v0.0.1.pkl"]
-    
+    do_not_delete = files_to_keep + ["__init__.py", model_filename]
+
     for model_file in TRAINED_MODEL_DIR.iterdir():
         if model_file.name not in do_not_delete:
             if model_file.is_file():
                 model_file.unlink()  # Remove file
             elif model_file.is_dir():
                 shutil.rmtree(model_file)  # Remove directory safely
+
 
