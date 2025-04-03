@@ -7,6 +7,9 @@ sys.path.append(str(root))
 import typing as t
 from pathlib import Path
 
+import shutil
+
+
 import joblib
 import pandas as pd
 from sklearn.pipeline import Pipeline
@@ -80,14 +83,19 @@ def load_pipeline(*, file_name: str) -> Pipeline:
     trained_model = joblib.load(filename=file_path)
     return trained_model
 
-
 def remove_old_pipelines(*, files_to_keep: t.List[str]) -> None:
     """
     Remove old model pipelines.
-    This is to ensure there is a simple one-to-one mapping between the package version and 
+    This ensures a one-to-one mapping between the package version and 
     the model version to be imported and used by other applications.
     """
+
     do_not_delete = files_to_keep + ["__init__.py"]
+    
     for model_file in TRAINED_MODEL_DIR.iterdir():
         if model_file.name not in do_not_delete:
-            model_file.unlink()
+            if model_file.is_file():
+                model_file.unlink()  # Remove file
+            elif model_file.is_dir():
+                shutil.rmtree(model_file)  # Remove directory safely
+
