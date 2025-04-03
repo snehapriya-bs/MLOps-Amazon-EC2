@@ -2,7 +2,7 @@
 FROM python:3.10-slim
 
 # copy application files
-RUN ls -ltr
+RUN ls -ltr && pwd
 #ADD /bikeshare_model_api /bikeshare_model_api/
 
 # specify working directory
