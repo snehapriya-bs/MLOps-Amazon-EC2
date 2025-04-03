@@ -16,7 +16,7 @@ COPY bike_sharing_api /app/bike_sharing_api
 RUN pip install --upgrade pip
 
 # install dependencies
-RUN pip install -r bikeshare_model_api/requirements.txt
+RUN pip install -r bike_sharing_api/requirements.txt
 
 # expose port for application
 EXPOSE 8001
