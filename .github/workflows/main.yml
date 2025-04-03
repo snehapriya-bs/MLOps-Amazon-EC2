@@ -78,4 +78,4 @@ jobs:
 
       - name: Run New API Container
         run: |
-          docker run -d --name bike-rental-api -p 8000:8000 sneh1919/amazon-compute:latest
+          docker run -d --name bike-rental-api -p 8001:8001 sneh1919/amazon-compute:latest
