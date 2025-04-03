@@ -5,8 +5,7 @@ on:
 
 jobs:
   build-train-test:
-    runs-on: ubuntu-latest
-
+    runs-on: self-hosted
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
