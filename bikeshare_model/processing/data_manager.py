@@ -90,7 +90,7 @@ def remove_old_pipelines(*, files_to_keep: t.List[str]) -> None:
     the model version to be imported and used by other applications.
     """
 
-    do_not_delete = files_to_keep + ["__init__.py"]
+     do_not_delete = files_to_keep + ["__init__.py", "bikeshare__model_output_v0.0.1.pkl"]
     
     for model_file in TRAINED_MODEL_DIR.iterdir():
         if model_file.name not in do_not_delete:
