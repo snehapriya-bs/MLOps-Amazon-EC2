@@ -9,8 +9,7 @@ COPY . .
 COPY bikeshare_model-0.0.1-py3-none-any.whl /app/
 
 # copy application files
-RUN ls -ltr && pwd
-COPY bikeshare_model_api /app/bikeshare_model_api
+COPY bike_sharing_api /app/bike_sharing_api
 
 
 # update pip
